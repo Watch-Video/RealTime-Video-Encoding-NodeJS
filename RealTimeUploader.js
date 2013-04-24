@@ -1,4 +1,3 @@
-var ProgressBar = require('progress');
 var formidable = require('formidable');
 var http = require('http');
 var sys = require('sys');
@@ -47,14 +46,6 @@ http.createServer(function (req, res) {
         var form = new formidable.IncomingForm();
         var ffmpeg = null;
 
-        var len = parseInt(req.headers['content-length'], 10);
-        var bar = new ProgressBar('  uploading [:bar] :percent :etas', {
-            complete: '=',
-            incomplete: ' ',
-            width: 20,
-            total: len
-        });
-
         form.maxFieldsSize = 29 * 1024 * 1024;
         // Handle each part of the multi-part post
         var form = new formidable.IncomingForm();
@@ -72,7 +63,6 @@ http.createServer(function (req, res) {
             });
             // Handle each data chunk as data streams in
             part.addListener('data', function (data) {
-                bar.tick(data.length);
                 data_available = true;
                 chunks += data;
                 //console.log('Received ' + (size += data.length) / (1024.0 * 1024.0) + ' Mb');
