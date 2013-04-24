@@ -76,10 +76,6 @@ http.createServer(function (req, res) {
                 data_available = true;
                 chunks += data;
                 //console.log('Received ' + (size += data.length) / (1024.0 * 1024.0) + ' Mb');
-                /*
-                 * This only one line was the solution of my problem now all works really fast !! 500mbit like transloadit it does
-                 */
-
                 if (chunks <= 1) {
                     msg = 'No valid data sended !';
                     console.log(msg);
